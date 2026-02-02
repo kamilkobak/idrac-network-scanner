@@ -97,8 +97,8 @@ snmpget -v2c -c public 192.16.3.2 1.3.6.1.2.1.1.5.0
 iDRAC web: iDRAC Settings → Services → SNMP Agent → Enable
 
 
-📄 License: GPL-3.0 license.
-🙌 Author: Kamil Kobak
-🐧Open Source > Everything 
+- 📄 License: GPL-3.0 license.
+- 🙌 Author: Kamil Kobak
+- 🐧Open Source > Everything 
 
 
