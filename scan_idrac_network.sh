@@ -4,7 +4,7 @@
 # Author: Kamil Kobak 
 # Purpose: Network discovery and inventory for Dell iDRAC servers via SNMP
 # GitHub: https://github.com/kamilkobak/idrac-network-scanner
-# Version: 1.1
+# Version: 1.2
 
 # Configuration variables
 SHOW_ALL=${1:-0}                # 0 = show all hosts (default), 1 = show only idrac hosts
