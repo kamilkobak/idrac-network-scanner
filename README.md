@@ -26,6 +26,8 @@ sudo yum install iputils net-snmp-utils sqlite
 🚀 Usage
 
 ```bash
+git clone https://github.com/kamilkobak/idrac-network-scanner
+cd cd idrac-network-scanner/
 chmod +x scan_idrac_network.sh
 ./scan_idrac_network.sh
 ```
