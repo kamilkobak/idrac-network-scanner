@@ -30,7 +30,7 @@ git clone https://github.com/kamilkobak/idrac-network-scanner
 cd idrac-network-scanner/
 chmod +x scan_idrac_network.sh
 ./scan_idrac_network.sh # show all hosts
-./scan_idrac_network.sh # show only idrac hosts
+./scan_idrac_network.sh 1 # show only idrac hosts
 ```
 Example output:
 
