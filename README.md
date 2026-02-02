@@ -56,7 +56,7 @@ Data saved to idrac_inventory.db
 Edit variables at the top of the script:
 
 ```bash
-NETWORK="192.16.3.0"        # Network /24
+NETWORK="192.16.3"        # Network /24
 SNMPCOMMUNITY="public"    # SNMP community
 TIMEOUT=2                 # SNMP timeout (s)
 ```
