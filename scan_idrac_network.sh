@@ -8,7 +8,7 @@
 
 # Configuration variables
 SHOW_ALL=${1:-0}                # 0 = show all hosts (default), 1 = show only idrac hosts
-NETWORK="172.16.3"              # Base network /24 (e.g. 192.16.3)
+NETWORK="192.16.3"              # Base network /24 (e.g. 192.16.3)
 SNMP_COMMUNITY="public"         # SNMP community string
 SNMP_TIMEOUT=2                  # SNMP timeout for response/retry (seconds)
 PING_TIMEOUT=1                  # Ping timeout (seconds)
