@@ -7,7 +7,8 @@
 # Version: 1.1
 
 # Configuration variables
-NETWORK="192.16.3"              # Base network /24 (e.g. 192.16.3)
+SHOW_ALL=${1:-0}                # 0 = show all hosts (default), 1 = show only idrac hosts
+NETWORK="172.16.3"              # Base network /24 (e.g. 192.16.3)
 SNMP_COMMUNITY="public"         # SNMP community string
 SNMP_TIMEOUT=2                  # SNMP timeout for response/retry (seconds)
 PING_TIMEOUT=1                  # Ping timeout (seconds)
@@ -66,7 +67,7 @@ sqlite3 "${DB_FILE}" "INSERT INTO idrac_inventory_old SELECT * FROM idrac_invent
 # Current scan header
 echo "=== CURRENT SCAN ($(date '+%Y-%m-%d %H:%M:%S')) ==="
 printf "%-15s %-25s %-40s %-15s\n" "IP" "Hostname" "FQDN" "Service Tag"
-printf "%s\n" "--------------------------------------------------------------------------------------------------------------------"
+printf "%s\n" "---------------------------------------------------------------------------------------------------------------"
 
 # Network scan and data collection
 declare -a current_data
@@ -84,12 +85,15 @@ for i in {1..254}; do
         raw_tag=$(snmpget -v2c -c "${SNMP_COMMUNITY}" -t"${SNMP_TIMEOUT}" "${local_ip}" "${OID_SERVICETAG}" 2>/dev/null)
         servicetag=$(parse_snmp "${raw_tag}")
         
-        if [[ "${hostname}" != "-" && -n "${hostname}" ]]; then
-            printf "%-15s %-25s %-40s %-15s\n" "${local_ip}" "${hostname}" "${fqdn}" "${servicetag}"
-            
-            timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-            current_data+=("${timestamp}|${local_ip}|${hostname}|${fqdn}|${servicetag}")
-        fi
+	if [[ "${SHOW_ALL}" == "1" ]]; then
+	    if [[ "${hostname}" != "-" && -n "${hostname}" ]]; then
+	        printf "%-15s %-25s %-40s %-15s\n" "${local_ip}" "${hostname}" "${fqdn}" "${servicetag}"
+                timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+	        current_data+=("${timestamp}|${local_ip}|${hostname}|${fqdn}|${servicetag}")
+	    fi
+	else
+	    printf "%-15s %-25s %-40s %-15s\n" "${local_ip}" "${hostname}" "${fqdn}" "${servicetag}"
+	fi
     fi
 done
 
@@ -138,4 +142,6 @@ SELECT * FROM changes ORDER BY change, ip;
 echo ""
 echo "✅ Inventory saved to ${DB_FILE}"
 echo "📊 Run again to track changes (cron-ready)"
+
+
 
